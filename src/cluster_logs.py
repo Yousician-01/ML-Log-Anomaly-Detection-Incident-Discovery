@@ -6,7 +6,7 @@ from sklearn.cluster import DBSCAN
 from sklearn.preprocessing import StandardScaler
 
 # config
-DATA_PATH = "data/processed/unified_logs.parquet"
+DATA_PATH = "data/processed/unified_logs_with_incidents.parquet"
 EMBED_PATH = "data/processed/embeddings/tfidf_embeddings.joblib"
 OUTPUT_PATH = "data/processed/logs_with_clusters.parquet"
 

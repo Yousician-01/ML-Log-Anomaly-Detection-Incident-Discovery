@@ -5,7 +5,7 @@ import joblib
 
 # Configs
 
-INPUT_PATH = "data/processed/unified_logs.parquet"
+INPUT_PATH = "data/processed/unified_logs_with_incidents.parquet"
 OUTPUT_DIR = Path("data/processed/embeddings")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
