@@ -67,4 +67,4 @@ if not final_incidents.empty:
         ]
     )
 else:
-    print("🎉 No actionable incidents — system stable.")
+    print("No actionable incidents — system stable.")
