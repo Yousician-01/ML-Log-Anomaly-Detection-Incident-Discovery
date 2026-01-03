@@ -8,23 +8,15 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from sklearn.metrics.pairwise import cosine_distances
 
-# --------------------------------------------------
-# PROJECT ROOT
-# --------------------------------------------------
+# Root directory
 ROOT_DIR = Path(__file__).resolve().parent.parent
 sys.path.append(str(ROOT_DIR))
 
-# --------------------------------------------------
-# PATHS
-# --------------------------------------------------
 VECTORIZER_PATH = ROOT_DIR / "data" / "processed" / "embeddings" / "tfidf_vectorizer.joblib"
 EMBEDDINGS_PATH = ROOT_DIR / "data" / "processed" / "embeddings" / "tfidf_embeddings.joblib"
 HIST_LOGS_PATH = ROOT_DIR / "data" / "processed" / "logs_with_clusters.parquet"
 LIVE_LOGS_PATH = ROOT_DIR / "data" / "processed" / "live_logs.parquet"
 
-# --------------------------------------------------
-# LOAD ARTIFACTS (ONCE)
-# --------------------------------------------------
 vectorizer = joblib.load(VECTORIZER_PATH)
 historical_embeddings = joblib.load(EMBEDDINGS_PATH)
 historical_logs = pd.read_parquet(HIST_LOGS_PATH)
@@ -39,14 +31,10 @@ KNOWN_TEMPLATES = set(historical_logs["template"].astype(str).unique())
 
 ANOMALY_DISTANCE_THRESHOLD = 0.35  # intentionally conservative
 
-# --------------------------------------------------
-# FASTAPI APP
-# --------------------------------------------------
+# App
 app = FastAPI(title="Log Intelligence Inference API")
 
-# --------------------------------------------------
-# REQUEST SCHEMA
-# --------------------------------------------------
+# Request model
 class LogEvent(BaseModel):
     timestamp: datetime | None = None
     source: str
@@ -54,9 +42,7 @@ class LogEvent(BaseModel):
     component: str
     message: str
 
-# --------------------------------------------------
-# ANOMALY LOGIC (IMPORTANT)
-# --------------------------------------------------
+# Anomaly logic
 def infer_anomaly(event: LogEvent) -> dict:
     """
     Multi-rule anomaly detection.
@@ -69,11 +55,7 @@ def infer_anomaly(event: LogEvent) -> dict:
     if level == "ERROR":
         return {"is_anomaly": True, "reason": "ERROR_level"}
 
-    # Rule 2: Unseen template
-    if text not in KNOWN_TEMPLATES:
-        return {"is_anomaly": True, "reason": "unseen_template"}
-
-    # Rule 3: Distance-based novelty
+    # Rule 2: Distance-based novelty
     X_new = vectorizer.transform([text])
     dist = cosine_distances(X_new, NORMAL_CENTROID)[0][0]
 
@@ -82,9 +64,7 @@ def infer_anomaly(event: LogEvent) -> dict:
 
     return {"is_anomaly": False, "reason": f"normal_distance={dist:.3f}"}
 
-# --------------------------------------------------
-# API ENDPOINT
-# --------------------------------------------------
+# API endpoint
 @app.post("/logs")
 def ingest_log(event: LogEvent):
     ts = event.timestamp or datetime.utcnow()
