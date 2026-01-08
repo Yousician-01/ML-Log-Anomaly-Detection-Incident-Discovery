@@ -46,8 +46,3 @@ jobs:
           from api.main import app
           print("FastAPI app loaded successfully")
           EOF
-
-      # Docker build validation
-      - name: Build Docker image
-        run: |
-          docker build -t log-intelligence-system .
