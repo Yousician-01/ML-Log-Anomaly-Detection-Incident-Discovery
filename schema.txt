@@ -1,5 +1,0 @@
-Log Intelligence System for Incident Discovery & Anomaly Detection
-
-Problem Statement 
-Modern systems generate millions of logs daily. Most incidents are unknown beforehand, labels are missing, and rule-based alerts don’t scale.
-This project builds an unsupervised system to automatically discover log patterns, detect anomalies, and surface novel incidents without prior labels.
