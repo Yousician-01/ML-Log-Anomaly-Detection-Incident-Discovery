@@ -1,7 +1,9 @@
 numpy
 pandas
 streamlit
+streamlit-autorefresh
 scikit-learn
 watchdog
 fastapi
+uvicorn
 pydantic

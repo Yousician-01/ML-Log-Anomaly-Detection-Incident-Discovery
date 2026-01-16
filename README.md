@@ -1,5 +1,7 @@
 # Log Intelligence & Incident Discovery System
 ![CI](https://github.com/Yousician-01/ML-Log-Anomaly-Detection-Incident-Discovery/actions/workflows/ci.yml/badge.svg)
+![Docker](https://img.shields.io/docker/v/atharvaraut01/log-intelligence-system/v1.0.0)
+
 An end-to-end **unsupervised log intelligence system** for detecting anomalous log events and surfacing incidents from both historical and live streaming logs.
 
 This project demonstrates how unsupervised NLP techniques, statistical baselines, and system design principles can be combined to build a **real-world observability and anomaly detection pipeline**.
@@ -212,6 +214,34 @@ POST /logs
 }
 ```
 Logs appear automatically in the **Live Monitoring** tab.
+
+---
+
+### Docker Support
+This project can be containerized to ensure environment reproducibility and easy deployment.
+Docker is recommended for:
+- Avoiding Python version conflicts
+- Ensuring consistent dependency resolution
+- Running the system without local setup complexity
+
+Dockerized Components
+The Docker setup supports:
+- FastAPI inference service
+- Streamlit dashboard
+
+Both services run using a fixed Python runtime and pinned dependencies.
+
+**Build the Docker Image**
+From the project root:
+```bash
+docker build -t log-intelligence-system .
+```
+**Run the Container**
+```bash
+docker run -p 8000:8000 -p 8501:8501 log-intelligence-system
+```
+- FastApi -> ```http://localhost:8000/docs```
+- Streamlit -> ```http://localhost:8501```
 
 ---
 
