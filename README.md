@@ -1,6 +1,6 @@
 # Log Intelligence & Incident Discovery System
 ![CI](https://github.com/Yousician-01/ML-Log-Anomaly-Detection-Incident-Discovery/actions/workflows/ci.yml/badge.svg)
-![Docker](https://img.shields.io/docker/v/atharvaraut01/log-intelligence-system/v1.0.0)
+![Docker](https://img.shields.io/docker/atharvaraut01/log-intelligence-system/general)
 
 An end-to-end **unsupervised log intelligence system** for detecting anomalous log events and surfacing incidents from both historical and live streaming logs.
 
