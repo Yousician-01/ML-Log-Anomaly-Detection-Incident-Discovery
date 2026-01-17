@@ -231,18 +231,14 @@ The Docker setup supports:
 
 Both services run using a fixed Python runtime and pinned dependencies.
 
-**Build the Docker Image**
-From the project root:
+**Pull the Container**
 ```bash
-docker build -t log-intelligence-system .
+docker pull atharvaraut01/log-intelligence-system:latest
 ```
 **Run the Container**
 ```bash
-docker run -p 8000:8000 -p 8501:8501 log-intelligence-system
+docker run -p 8000:8000 -p 8501:8501 atharvaraut01/log-intelligence-system:latest
 ```
-- FastApi -> ```http://localhost:8000/docs```
-- Streamlit -> ```http://localhost:8501```
-
 ---
 
 ## Design Decisions & Trade-offs
